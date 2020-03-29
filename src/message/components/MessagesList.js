@@ -44,6 +44,7 @@ class MessagesList extends React.Component {
             <MessagesListUl className="messages-list" id="messages-list">
                 {this.props.items.map(message => (
                     <MessageItem
+                        key={message.id}
                         message={message}
                     />
                 ))}

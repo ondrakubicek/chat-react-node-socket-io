@@ -27,8 +27,10 @@ const Auth = (props) => {
 
     const authSubmitHandler = event => {
         event.preventDefault();
-        auth.login(formState.inputs.name.value);
+        const username = event.target.name.value;
+        auth.login(username); 
     };
+   
 
     return (
         <Card className="authentication">
@@ -42,7 +44,6 @@ const Auth = (props) => {
                     validators={[VALIDATOR_REQUIRE()]}
                     errorText="Please enter a name."
                     onInput={inputHandler}
-                    value={props.username}
                 />
                 <Button type="submit" disabled={!formState.isValid}>
                     LOGIN

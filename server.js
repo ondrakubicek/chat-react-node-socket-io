@@ -24,6 +24,9 @@ const botName = 'ChatBot';
 // Run when client connects
 io.on('connection', socket => {
     socket.on('joinRoom', ({ username, room }) => {
+        if(!username){
+            return;
+        }
         const user = userJoin(socket.id, username, room);
         socket.join(user.room);
 
@@ -41,7 +44,8 @@ io.on('connection', socket => {
         // Send users and room info
         io.to(user.room).emit('roomUsers', {
             room: user.room,
-            users: getRoomUsers(user.room)
+            users: getRoomUsers(user.room),
+            currentUser: user,
         });
     });
 
@@ -52,9 +56,11 @@ io.on('connection', socket => {
         io.to(user.room).emit('message', formatMessage(user.username, msg));
     });
 
-    // Runs when client disconnects
-    socket.on('disconnect', () => {
+    logout = () => {
+        console.log("disconect");
+        console.log(socket.id);
         const user = userLeave(socket.id);
+        console.log(user);
         if (user) {
             io.to(user.room).emit(
                 'message',
@@ -64,9 +70,19 @@ io.on('connection', socket => {
             // Send users and room info
             io.to(user.room).emit('roomUsers', {
                 room: user.room,
-                users: getRoomUsers(user.room)
+                users: getRoomUsers(user.room),
+                currentUser: user,
             });
         }
+    }
+    // Runs when client disconnects
+    socket.on('disconnect', () => {
+        logout();
+    });
+
+    // Runs when client disconnects
+    socket.on('logout', () => {
+        logout();
     });
 });
 
