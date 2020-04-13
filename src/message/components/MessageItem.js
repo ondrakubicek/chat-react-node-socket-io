@@ -1,6 +1,5 @@
 import React, { Component } from 'react';
 import styled from 'styled-components';
-import {useForm} from "../../shared/hooks/form-hook";
 
 const MessageItemLi = styled.li`
     list-style: none;

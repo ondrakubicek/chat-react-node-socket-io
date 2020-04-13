@@ -26,6 +26,7 @@ const UsersList = props => {
             {props.items.map(user => (
                 <UserItem
                     user={user}
+                    key={user.id}
                 />
             ))}
         </UserListUl>

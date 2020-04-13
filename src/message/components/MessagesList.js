@@ -4,8 +4,6 @@ import { animateScroll } from "react-scroll";
 import styled from "styled-components";
 import MessageItem from "./MessageItem";
 
-import {useForm} from "../../shared/hooks/form-hook";
-
 const MessagesListUl = styled.ul`
     list-style: none;
     padding: 0;

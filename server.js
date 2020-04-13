@@ -23,8 +23,8 @@ const botName = 'ChatBot';
 
 // Run when client connects
 io.on('connection', socket => {
-    socket.on('joinRoom', ({ username, room }) => {
-        if(!username){
+    socket.on('joinRoom', ({username, room}) => {
+        if (!username) {
             return;
         }
         const user = userJoin(socket.id, username, room);
@@ -51,17 +51,18 @@ io.on('connection', socket => {
 
     // Listen for chatMessage
     socket.on('chatMessage', msg => {
-        console.log(msg);
         const user = getCurrentUser(socket.id);
+        console.log(`message ${socket.id}`);
         io.to(user.room).emit('message', formatMessage(user.username, msg));
     });
 
-    logout = () => {
-        console.log("disconect");
-        console.log(socket.id);
-        const user = userLeave(socket.id);
-        console.log(user);
+    // Runs when client disconnects
+    socket.on('disconnect', () => {
+        const user = getCurrentUser(socket.id);
+        console.log(`disconnect! ${socket.id}`);
+        console.log()
         if (user) {
+            userLeave(user.id);
             io.to(user.room).emit(
                 'message',
                 formatMessage(botName, `${user.username} has left the chat`)
@@ -74,16 +75,8 @@ io.on('connection', socket => {
                 currentUser: user,
             });
         }
-    }
-    // Runs when client disconnects
-    socket.on('disconnect', () => {
-        logout();
     });
 
-    // Runs when client disconnects
-    socket.on('logout', () => {
-        logout();
-    });
 });
 
 const PORT = process.env.PORT || 4000;

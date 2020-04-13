@@ -6,11 +6,11 @@ import MainNavigation from "./shared/components/Navigation/MainNavigation";
 import Content from "./shared/components/UIElements/Content";
 import ChatSocket from './shared/util/ChatSocket';
 
+const socket = new ChatSocket();
 
 const App = () => {
   const [isLoggedIn, setIsLoggedIn] = useState(false);
   const [username, setUsername] = useState(false);
-  const chatSocket = new ChatSocket();
 
   const login = useCallback((username) => {
     setIsLoggedIn(true);
@@ -19,13 +19,13 @@ const App = () => {
 
   const logout = useCallback(() => {
     setIsLoggedIn(false);
-    chatSocket.logout();
+    socket.logout();
   }, []);
 
   let output = false;
       
   if(isLoggedIn) {
-    output =  <Chat username={username} isLoggedIn={isLoggedIn} chatSocket={chatSocket}/>;
+    output =  <Chat username={username} isLoggedIn={isLoggedIn} chatSocket={socket}/>;
   } else {
     output = (
       <Auth username={username}/>

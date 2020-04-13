@@ -1,4 +1,4 @@
-import React, {Component, useReducer} from 'react';
+import React from 'react';
 import Avatar from '../../shared/components/UIElements/Avatar';
 import styled from 'styled-components';
 

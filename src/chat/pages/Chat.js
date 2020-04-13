@@ -1,29 +1,26 @@
 import React from 'react';
-import io from 'socket.io-client';
 
 import UsersList from "../../user/components/UsersList";
 import MessagesList from "../../message/components/MessagesList";
 import MessageForm from "../../message/components/MessageForm";
-import ChatSocket from '../../shared/util/ChatSocket';
 
 
 class Chat extends React.Component {
 
     constructor(props) {
-        super(props); 
+        super(props);
         this.state = {
             messages: [],
             users: [],
-            currentUser: { 'username': props.username},
-            chatSocket: props.chatSocket
+            currentUser: { 'username': props.username}
         }
     };
 
     componentDidMount() {
-        console.log(this.chatSocket);
-        this.state.chatSocket.logIn(this.state.currentUser.username);
-        this.state.chatSocket.socket.on("message", data => this.addMessage(data));
-        this.state.chatSocket.socket.on("roomUsers", data => this.updateUsers(data));
+        console.log("log in"+this.state.currentUser.username);
+        this.props.chatSocket.logIn(this.state.currentUser.username);
+        this.props.chatSocket.socket.on("message", data => this.addMessage(data));
+        this.props.chatSocket.socket.on("roomUsers", data => this.updateUsers(data));
     }
 
     updateUsers(data) {
@@ -37,8 +34,8 @@ class Chat extends React.Component {
     }
 
     sendMessageHandler(message) {
-        if(this.state.chatSocket){
-            this.state.chatSocket.socket.emit('chatMessage', message);
+        if(this.props.chatSocket){
+            this.props.chatSocket.socket.emit('chatMessage', message);
         }
     }
  

@@ -1,5 +1,5 @@
 
-const users = [];
+let users = [];
 
 // Join user to chat
 function userJoin(id, username, room) {
@@ -7,7 +7,7 @@ function userJoin(id, username, room) {
         id, username, room, image:
             'https://picsum.photos/35/'
     };
-
+    console.log(`connect ${id}`);
     users.push(user);
 
     return user;
@@ -20,10 +20,8 @@ function getCurrentUser(id) {
 
 // User leaves chat
 function userLeave(id) {
-    const index = users.findIndex(user => user.id === id);
-    if (index !== -1) {
-        return users.splice(index, 1)[0];
-    }
+    const newUsers = users.filter(user => user.id !== id);
+    users = newUsers;
 }
 
 // Get room users

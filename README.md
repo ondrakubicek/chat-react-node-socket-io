@@ -12,12 +12,12 @@ Chat <br />
 
 In the project directory, you can run:
 
-### `npm start-server`
+### `npm run start-server`
 
 Runs server on adress http://localhost:4000.<br />
 
 
-### `npm start-frontend`
+### `npm run start-frontend`
 
 Runs the app in the development mode.<br />
 Open [http://localhost:3000](http://localhost:3000) to view it in the browser.

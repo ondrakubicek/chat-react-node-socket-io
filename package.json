@@ -7,7 +7,6 @@
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
-    "babel-jest": "^25.2.3",
     "express": "^4.17.1",
     "moment": "^2.24.0",
     "react": "^16.13.1",
@@ -17,7 +16,7 @@
     "socket.io": "^2.3.0"
   },
   "scripts": {
-    "start-server": "node server",
+    "start-server": "node server.js",
     "start-frontend": "react-scripts start",
     "dev": "nodemon server, react-scripts start",
     "build": "react-scripts build",
@@ -40,9 +39,9 @@
     ]
   },
   "devDependencies": {
-    "nodemon": "^2.0.2",
+    "nodemon": "^2.0.3",
     "react-router-dom": "^5.1.2",
     "react-socket-io": "^0.2.5",
-    "styled-components": "^5.0.1"
+    "styled-components": "^5.1.0"
   }
 }
