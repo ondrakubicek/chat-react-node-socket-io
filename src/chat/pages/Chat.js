@@ -17,7 +17,6 @@ class Chat extends React.Component {
     };
 
     componentDidMount() {
-        console.log("log in"+this.state.currentUser.username);
         this.props.chatSocket.logIn(this.state.currentUser.username);
         this.props.chatSocket.socket.on("message", data => this.addMessage(data));
         this.props.chatSocket.socket.on("roomUsers", data => this.updateUsers(data));
